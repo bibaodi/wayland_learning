@@ -1,40 +1,61 @@
 // Copyright (C) 2017 The Qt Company Ltd.
 // SPDX-License-Identifier: LicenseRef-Qt-Commercial OR BSD-3-Clause
-
 import QtQuick
 import QtWayland.Compositor
 
 ShellSurfaceItem {
-    id: chrome
+    id: id_chrome_shellSurfaceItem
 
-    property bool isChild: parent.shellSurface !== undefined
+    property bool prop_isChild: parent.shellSurface !== undefined
 
-    signal destroyAnimationFinished
+    signal sig_destroyAnimationFinished
 
     // ![destruction]
     onSurfaceDestroyed: {
-        bufferLocked = true;
-        destroyAnimation.start();
+        bufferLocked = true
+        destroyAnimation.start()
     }
 
     SequentialAnimation {
         id: destroyAnimation
 
         ParallelAnimation {
-            NumberAnimation { target: scaleTransform; property: "yScale"; to: 2/height; duration: 150 }
-            NumberAnimation { target: scaleTransform; property: "xScale"; to: 0.4; duration: 150 }
-            NumberAnimation { target: chrome; property: "opacity"; to: chrome.isChild ? 0 : 1; duration: 150 }
+            NumberAnimation {
+                target: scaleTransform
+                property: "yScale"
+                to: 2 / height
+                duration: 150
+            }
+            NumberAnimation {
+                target: scaleTransform
+                property: "xScale"
+                to: 0.4
+                duration: 150
+            }
+            NumberAnimation {
+                target: id_chrome_shellSurfaceItem
+                property: "opacity"
+                to: id_chrome_shellSurfaceItem.prop_isChild ? 0 : 1
+                duration: 150
+            }
         }
-        NumberAnimation { target: scaleTransform; property: "xScale"; to: 0; duration: 150 }
-        ScriptAction { script: destroyAnimationFinished() }
+        NumberAnimation {
+            target: scaleTransform
+            property: "xScale"
+            to: 0
+            duration: 150
+        }
+        ScriptAction {
+            script: sig_destroyAnimationFinished()
+        }
     }
-    // ![destruction]
 
+    // ![destruction]
     transform: [
         Scale {
             id: scaleTransform
-            origin.x: chrome.width / 2
-            origin.y: chrome.height / 2
+            origin.x: id_chrome_shellSurfaceItem.width / 2
+            origin.y: id_chrome_shellSurfaceItem.height / 2
         }
     ]
 
@@ -45,9 +66,10 @@ ShellSurfaceItem {
         // some signals are not available on wl_shell, so let's ignore them
         ignoreUnknownSignals: true
 
-        function onActivatedChanged() { // xdg_shell only
+        function onActivatedChanged() {
+            // xdg_shell only
             if (shellSurface.toplevel.activated) {
-                receivedFocusAnimation.start();
+                receivedFocusAnimation.start()
             }
         }
     }
@@ -56,12 +78,36 @@ ShellSurfaceItem {
         id: receivedFocusAnimation
 
         ParallelAnimation {
-            NumberAnimation { target: scaleTransform; property: "yScale"; to: 1.02; duration: 100; easing.type: Easing.OutQuad }
-            NumberAnimation { target: scaleTransform; property: "xScale"; to: 1.02; duration: 100; easing.type: Easing.OutQuad }
+            NumberAnimation {
+                target: scaleTransform
+                property: "yScale"
+                to: 1.02
+                duration: 100
+                easing.type: Easing.OutQuad
+            }
+            NumberAnimation {
+                target: scaleTransform
+                property: "xScale"
+                to: 1.02
+                duration: 100
+                easing.type: Easing.OutQuad
+            }
         }
         ParallelAnimation {
-            NumberAnimation { target: scaleTransform; property: "yScale"; to: 1; duration: 100; easing.type: Easing.InOutQuad }
-            NumberAnimation { target: scaleTransform; property: "xScale"; to: 1; duration: 100; easing.type: Easing.InOutQuad }
+            NumberAnimation {
+                target: scaleTransform
+                property: "yScale"
+                to: 1
+                duration: 100
+                easing.type: Easing.InOutQuad
+            }
+            NumberAnimation {
+                target: scaleTransform
+                property: "xScale"
+                to: 1
+                duration: 100
+                easing.type: Easing.InOutQuad
+            }
         }
     }
     // ![activation]

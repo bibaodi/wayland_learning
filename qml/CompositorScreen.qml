@@ -5,29 +5,33 @@ import QtQuick.Window
 import QtWayland.Compositor
 
 WaylandOutput {
-    id: output
+    id: id_wloutput01
 
     property ListModel prop_shellSurfaces: ListModel {}
-    property bool isNestedCompositor: Qt.platform.pluginName.startsWith("wayland") || Qt.platform.pluginName === "xcb"
+    property bool prop_isNestedCompositor: Qt.platform.pluginName.startsWith("wayland")
+                                           || Qt.platform.pluginName === "xcb"
 
     // ![handleShellSurface]
     function handleShellSurface(shellSurface) {
-        console.log("handleShellsurface: param=", shellSurface)
+        console.log("handleShellsurface: param=", shellSurface, ",id_wloutput01.prop_isNestedCompositor=",
+                    id_wloutput01.prop_isNestedCompositor, ",Qt.platform.pluginName=", Qt.platform.pluginName,
+                    ",sizeFollowsWindow=", id_wloutput01.sizeFollowsWindow)
         prop_shellSurfaces.append({
                                       "shellSurface": shellSurface
                                   })
     }
+
     // ![handleShellSurface]
 
     // During development, it can be useful to start the compositor inside X11 or
     // another Wayland compositor. In such cases, set sizeFollowsWindow to true to
     // enable resizing of the compositor window to be forwarded to the Wayland clients
-    // as the output (screen) changing resolution. Consider setting it to false if you
+    // as the id_wloutput01 (screen) changing resolution. Consider setting it to false if you
     // are running the compositor using eglfs, linuxfb or similar QPA backends.
-    sizeFollowsWindow: output.isNestedCompositor
-
+    //sizeFollowsWindow: id_wloutput01.prop_isNestedCompositor
     window: Window {
-        width: 1024
+        id: id_wdInOP
+        width: 800
         height: 760
         visible: true
 
@@ -38,7 +42,7 @@ WaylandOutput {
 
             // Set this to false to disable the outer mouse cursor when running nested
             // compositors. Otherwise you would see two mouse cursors, one for each compositor.
-            windowSystemCursorEnabled: output.isNestedCompositor
+            windowSystemCursorEnabled: id_wloutput01.prop_isNestedCompositor
 
             Image {
                 id: background
@@ -50,11 +54,11 @@ WaylandOutput {
 
                 // ![repeater]
                 Repeater {
-                    model: output.prop_shellSurfaces
+                    model: id_wloutput01.prop_shellSurfaces
                     // Chrome displays a shell surface on the screen (See Chrome.qml)
                     Chrome {
                         shellSurface: modelData
-                        onDestroyAnimationFinished: output.prop_shellSurfaces.remove(index)
+                        onSig_destroyAnimationFinished: id_wloutput01.prop_shellSurfaces.remove(index)
                     }
                 }
                 // ![repeater]
@@ -73,13 +77,17 @@ WaylandOutput {
                 inputEventsEnabled: false
                 x: mouseTracker.mouseX
                 y: mouseTracker.mouseY
-                seat: output.compositor.defaultSeat
+                seat: id_wloutput01.compositor.defaultSeat
             }
         }
 
         Shortcut {
             sequence: "Ctrl+Alt+Backspace"
             onActivated: Qt.quit()
+        }
+        onAfterRendering: {
+
+            //console.log("screen0-prop:", id_screen0.manufacturer)
         }
     }
 }
