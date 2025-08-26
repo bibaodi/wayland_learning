@@ -12,6 +12,7 @@ ShellSurfaceItem {
 
     // ![destruction]
     onSurfaceDestroyed: {
+        console.log("surf-destroy=", shellSurface.toplevel, ",activated=", shellSurface.toplevel.activated)
         id_chrome_shellSurfaceItem.bufferLocked = true
         id_destroyAnimation.start()
     }
@@ -61,13 +62,25 @@ ShellSurfaceItem {
 
     // ![activation]
     Connections {
-        target: shellSurface.toplevel !== undefined ? shellSurface.toplevel : null
-
+        //target: id_chrome_shellSurfaceItem.shellSurface.toplevel !== undefined ? id_chrome_shellSurfaceItem.shellSurface.toplevel : null
+        target: id_chrome_shellSurfaceItem.shellSurface.toplevel
         // some signals are not available on wl_shell, so let's ignore them
         ignoreUnknownSignals: true
 
         function onActivatedChanged() {
+            console.log("id_chrome_shellSurfaceItem onActivatedChanged()")
             // xdg_shell only
+            if (id_chrome_shellSurfaceItem.shellSurface.toplevel.activated) {
+                id_receivedFocusAnimation.start()
+                console.log("id_receivedFocusAnimation.start()")
+            }
+        }
+    }
+    Connections {
+        target: shellSurface.toplevel !== undefined ? shellSurface.toplevel : null
+        ignoreUnknownSignals: true
+        function onActivatedChanged() {
+            console.log("id_chrome_shellSurfaceItem onActivatedChanged()2")
             if (shellSurface.toplevel.activated) {
                 receivedFocusAnimation.start()
             }
@@ -75,21 +88,21 @@ ShellSurfaceItem {
     }
 
     SequentialAnimation {
-        id: receivedFocusAnimation
+        id: id_receivedFocusAnimation
 
         ParallelAnimation {
             NumberAnimation {
                 target: id_scaleTransform
                 property: "yScale"
                 to: 1.02
-                duration: 100
+                duration: 1000
                 easing.type: Easing.OutQuad
             }
             NumberAnimation {
                 target: id_scaleTransform
                 property: "xScale"
                 to: 1.02
-                duration: 100
+                duration: 1000
                 easing.type: Easing.OutQuad
             }
         }
@@ -98,14 +111,14 @@ ShellSurfaceItem {
                 target: id_scaleTransform
                 property: "yScale"
                 to: 1
-                duration: 100
+                duration: 1000
                 easing.type: Easing.InOutQuad
             }
             NumberAnimation {
                 target: id_scaleTransform
                 property: "xScale"
                 to: 1
-                duration: 100
+                duration: 1000
                 easing.type: Easing.InOutQuad
             }
         }
