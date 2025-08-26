@@ -13,37 +13,37 @@ ShellSurfaceItem {
     // ![destruction]
     onSurfaceDestroyed: {
         id_chrome_shellSurfaceItem.bufferLocked = true
-        destroyAnimation.start()
+        id_destroyAnimation.start()
     }
 
     SequentialAnimation {
-        id: destroyAnimation
+        id: id_destroyAnimation
 
         ParallelAnimation {
             NumberAnimation {
-                target: scaleTransform
+                target: id_scaleTransform
                 property: "yScale"
                 to: 2 / height
-                duration: 150
+                duration: 1500
             }
             NumberAnimation {
-                target: scaleTransform
+                target: id_scaleTransform
                 property: "xScale"
                 to: 0.4
-                duration: 150
+                duration: 1500
             }
             NumberAnimation {
                 target: id_chrome_shellSurfaceItem
                 property: "opacity"
                 to: id_chrome_shellSurfaceItem.prop_isChild ? 0 : 1
-                duration: 150
+                duration: 1500
             }
         }
         NumberAnimation {
-            target: scaleTransform
+            target: id_scaleTransform
             property: "xScale"
             to: 0
-            duration: 150
+            duration: 1500
         }
         ScriptAction {
             script: sig_destroyAnimationFinished()
@@ -53,7 +53,7 @@ ShellSurfaceItem {
     // ![destruction]
     transform: [
         Scale {
-            id: scaleTransform
+            id: id_scaleTransform
             origin.x: id_chrome_shellSurfaceItem.width / 2
             origin.y: id_chrome_shellSurfaceItem.height / 2
         }
@@ -79,14 +79,14 @@ ShellSurfaceItem {
 
         ParallelAnimation {
             NumberAnimation {
-                target: scaleTransform
+                target: id_scaleTransform
                 property: "yScale"
                 to: 1.02
                 duration: 100
                 easing.type: Easing.OutQuad
             }
             NumberAnimation {
-                target: scaleTransform
+                target: id_scaleTransform
                 property: "xScale"
                 to: 1.02
                 duration: 100
@@ -95,14 +95,14 @@ ShellSurfaceItem {
         }
         ParallelAnimation {
             NumberAnimation {
-                target: scaleTransform
+                target: id_scaleTransform
                 property: "yScale"
                 to: 1
                 duration: 100
                 easing.type: Easing.InOutQuad
             }
             NumberAnimation {
-                target: scaleTransform
+                target: id_scaleTransform
                 property: "xScale"
                 to: 1
                 duration: 100

@@ -37,16 +37,13 @@ WaylandOutput {
 
         WaylandMouseTracker {
             id: mouseTracker
-
             anchors.fill: parent
-
             // Set this to false to disable the outer mouse cursor when running nested
             // compositors. Otherwise you would see two mouse cursors, one for each compositor.
             windowSystemCursorEnabled: id_wloutput01.prop_isNestedCompositor
 
             Image {
                 id: background
-
                 anchors.fill: parent
                 fillMode: Image.Tile
                 source: "qrc:/images/background.jpg"
