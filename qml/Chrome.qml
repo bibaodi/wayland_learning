@@ -3,16 +3,16 @@
 import QtQuick
 import QtWayland.Compositor
 
+//WaylandSurface
 ShellSurfaceItem {
     id: id_chrome_shellSurfaceItem
 
     property bool prop_isChild: parent.shellSurface !== undefined
-
     signal sig_destroyAnimationFinished
 
     // ![destruction]
     onSurfaceDestroyed: {
-        bufferLocked = true
+        id_chrome_shellSurfaceItem.bufferLocked = true
         destroyAnimation.start()
     }
 

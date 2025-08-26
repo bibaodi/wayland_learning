@@ -1,0 +1,1 @@
+WAYLAND_DISPLAY=wayland-0 QT_QPA_PLATFORM="wayland"  QT_DEBUG_PLUGINS=1 ./pure-qml >> debug.info0 2>&1

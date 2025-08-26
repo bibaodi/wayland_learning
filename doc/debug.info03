@@ -1,0 +1,211 @@
+QML debugging is enabled. Only use this in a safe environment.
+qt.core.plugin.factoryloader: checking directory path "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms" ...
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/qlinuxfb.debug"
+qt.core.plugin.factoryloader: "The shared library was not found." 
+         not a plugin
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqwayland-egl.so"
+qt.core.plugin.loader: Found metadata in lib /home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqwayland-egl.so, metadata=
+{
+    "IID": "org.qt-project.Qt.QPA.QPlatformIntegrationFactoryInterface.5.3",
+    "MetaData": {
+        "Keys": [
+            "wayland-egl"
+        ]
+    },
+    "archlevel": 1,
+    "className": "QWaylandEglPlatformIntegrationPlugin",
+    "debug": false,
+    "version": 394496
+}
+
+
+qt.core.plugin.factoryloader: Got keys from plugin meta data QList("wayland-egl")
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/qxcb.debug"
+qt.core.plugin.factoryloader: "The shared library was not found." 
+         not a plugin
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/qoffscreen.debug"
+qt.core.plugin.factoryloader: "The shared library was not found." 
+         not a plugin
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/qminimal.debug"
+qt.core.plugin.factoryloader: "The shared library was not found." 
+         not a plugin
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqminimal.so"
+qt.core.plugin.loader: Found metadata in lib /home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqminimal.so, metadata=
+{
+    "IID": "org.qt-project.Qt.QPA.QPlatformIntegrationFactoryInterface.5.3",
+    "MetaData": {
+        "Keys": [
+            "minimal"
+        ]
+    },
+    "archlevel": 1,
+    "className": "QMinimalIntegrationPlugin",
+    "debug": false,
+    "version": 394496
+}
+
+
+qt.core.plugin.factoryloader: Got keys from plugin meta data QList("minimal")
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqoffscreen.so"
+qt.core.plugin.loader: Found metadata in lib /home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqoffscreen.so, metadata=
+{
+    "IID": "org.qt-project.Qt.QPA.QPlatformIntegrationFactoryInterface.5.3",
+    "MetaData": {
+        "Keys": [
+            "offscreen"
+        ]
+    },
+    "archlevel": 1,
+    "className": "QOffscreenIntegrationPlugin",
+    "debug": false,
+    "version": 394496
+}
+
+
+qt.core.plugin.factoryloader: Got keys from plugin meta data QList("offscreen")
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqvnc.so"
+qt.core.plugin.loader: Found metadata in lib /home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqvnc.so, metadata=
+{
+    "IID": "org.qt-project.Qt.QPA.QPlatformIntegrationFactoryInterface.5.3",
+    "MetaData": {
+        "Keys": [
+            "vnc"
+        ]
+    },
+    "archlevel": 1,
+    "className": "QVncIntegrationPlugin",
+    "debug": false,
+    "version": 394496
+}
+
+
+qt.core.plugin.factoryloader: Got keys from plugin meta data QList("vnc")
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/qwayland-generic.debug"
+qt.core.plugin.factoryloader: "The shared library was not found." 
+         not a plugin
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/qvkkhrdisplay.debug"
+qt.core.plugin.factoryloader: "The shared library was not found." 
+         not a plugin
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqlinuxfb.so"
+qt.core.plugin.loader: Found metadata in lib /home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqlinuxfb.so, metadata=
+{
+    "IID": "org.qt-project.Qt.QPA.QPlatformIntegrationFactoryInterface.5.3",
+    "MetaData": {
+        "Keys": [
+            "linuxfb"
+        ]
+    },
+    "archlevel": 1,
+    "className": "QLinuxFbIntegrationPlugin",
+    "debug": false,
+    "version": 394496
+}
+
+
+qt.core.plugin.factoryloader: Got keys from plugin meta data QList("linuxfb")
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqxcb.so"
+qt.core.plugin.loader: Found metadata in lib /home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqxcb.so, metadata=
+{
+    "IID": "org.qt-project.Qt.QPA.QPlatformIntegrationFactoryInterface.5.3",
+    "MetaData": {
+        "Keys": [
+            "xcb"
+        ]
+    },
+    "archlevel": 1,
+    "className": "QXcbIntegrationPlugin",
+    "debug": false,
+    "version": 394496
+}
+
+
+qt.core.plugin.factoryloader: Got keys from plugin meta data QList("xcb")
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqvkkhrdisplay.so"
+qt.core.plugin.loader: Found metadata in lib /home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqvkkhrdisplay.so, metadata=
+{
+    "IID": "org.qt-project.Qt.QPA.QPlatformIntegrationFactoryInterface.5.3",
+    "MetaData": {
+        "Keys": [
+            "vkkhrdisplay"
+        ]
+    },
+    "archlevel": 1,
+    "className": "QVkKhrDisplayIntegrationPlugin",
+    "debug": false,
+    "version": 394496
+}
+
+
+qt.core.plugin.factoryloader: Got keys from plugin meta data QList("vkkhrdisplay")
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqminimalegl.so"
+qt.core.plugin.loader: Found metadata in lib /home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqminimalegl.so, metadata=
+{
+    "IID": "org.qt-project.Qt.QPA.QPlatformIntegrationFactoryInterface.5.3",
+    "MetaData": {
+        "Keys": [
+            "minimalegl"
+        ]
+    },
+    "archlevel": 1,
+    "className": "QMinimalEglIntegrationPlugin",
+    "debug": false,
+    "version": 394496
+}
+
+
+qt.core.plugin.factoryloader: Got keys from plugin meta data QList("minimalegl")
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqeglfs.so"
+qt.core.plugin.loader: Found metadata in lib /home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqeglfs.so, metadata=
+{
+    "IID": "org.qt-project.Qt.QPA.QPlatformIntegrationFactoryInterface.5.3",
+    "MetaData": {
+        "Keys": [
+            "eglfs"
+        ]
+    },
+    "archlevel": 1,
+    "className": "QEglFSIntegrationPlugin",
+    "debug": false,
+    "version": 394496
+}
+
+
+qt.core.plugin.factoryloader: Got keys from plugin meta data QList("eglfs")
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/qvnc.debug"
+qt.core.plugin.factoryloader: "The shared library was not found." 
+         not a plugin
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqwayland-generic.so"
+qt.core.plugin.loader: Found metadata in lib /home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqwayland-generic.so, metadata=
+{
+    "IID": "org.qt-project.Qt.QPA.QPlatformIntegrationFactoryInterface.5.3",
+    "MetaData": {
+        "Keys": [
+            "wayland"
+        ]
+    },
+    "archlevel": 1,
+    "className": "QWaylandIntegrationPlugin",
+    "debug": false,
+    "version": 394496
+}
+
+
+qt.core.plugin.factoryloader: Got keys from plugin meta data QList("wayland")
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/qwayland-egl.debug"
+qt.core.plugin.factoryloader: "The shared library was not found." 
+         not a plugin
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/qeglfs.debug"
+qt.core.plugin.factoryloader: "The shared library was not found." 
+         not a plugin
+qt.core.plugin.factoryloader: looking at "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/qminimalegl.debug"
+qt.core.plugin.factoryloader: "The shared library was not found." 
+         not a plugin
+qt.core.plugin.factoryloader: checking directory path "/home/eton/00-src/50-others/wayland/pure-qml/build/Desktop_Qt_6_5_3_GCC_64bit-Debug/platforms" ...
+qt.core.library: "/home/eton/Qt/6.5.3/gcc_64/plugins/platforms/libqwayland-generic.so" loaded library
+error: XDG_RUNTIME_DIR is invalid or not set in the environment.
+Failed to create wl_display (No such file or directory)
+qt.qpa.plugin: Could not load the Qt platform plugin "wayland" in "" even though it was found.
+This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+
+Available platform plugins are: wayland-egl, minimal, offscreen, vnc, linuxfb, xcb, vkkhrdisplay, minimalegl, eglfs, wayland.
+
