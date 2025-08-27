@@ -4,39 +4,38 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include <QOpenGLWindow>
 #include <QOpenGLTextureBlitter>
+#include <QOpenGLWindow>
 
 QT_BEGIN_NAMESPACE
 
 class Compositor;
 
-class Window : public QOpenGLWindow
-{
-    Q_OBJECT
+class Window4wlc : public QOpenGLWindow {
+  Q_OBJECT
 public:
-    Window();
-    void setCompositor(Compositor *comp);
+  Window4wlc();
+  void setCompositor(Compositor *comp);
 
 signals:
-    void glReady();
+  void glReady();
 
 protected:
-    void initializeGL() override;
-    void paintGL() override;
-    void mousePressEvent(QMouseEvent *event) override;
-    void mouseReleaseEvent(QMouseEvent *event) override;
-    void mouseMoveEvent(QMouseEvent *event) override;
-    void wheelEvent(QWheelEvent *) override;
+  void initializeGL() override;
+  void paintGL() override;
+  void mousePressEvent(QMouseEvent *event) override;
+  void mouseReleaseEvent(QMouseEvent *event) override;
+  void mouseMoveEvent(QMouseEvent *event) override;
+  void wheelEvent(QWheelEvent *) override;
 
-    void keyPressEvent(QKeyEvent *e) override;
-    void keyReleaseEvent(QKeyEvent *e) override;
+  void keyPressEvent(QKeyEvent *e) override;
+  void keyReleaseEvent(QKeyEvent *e) override;
 
 private:
-    QOpenGLTextureBlitter m_textureBlitter;
-    Compositor *m_compositor = nullptr;
+  QOpenGLTextureBlitter m_textureBlitter;
+  Compositor *m_compositor = nullptr;
 };
 
 QT_END_NAMESPACE
 
-#endif //WINDOW_H
+#endif // WINDOW_H

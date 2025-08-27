@@ -11,15 +11,15 @@
 
 QT_BEGIN_NAMESPACE
 
-class Window;
+class Window4wlc;
 class QOpenGLTexture;
 class QWaylandIviApplication;
 class QWaylandIviSurface;
 
-class View : public QWaylandView {
+class WlView : public QWaylandView {
   Q_OBJECT
 public:
-  explicit View(int iviId) : m_iviId(iviId) {}
+  explicit WlView(int iviId);
   QOpenGLTexture *getTexture();
   int iviId() const { return m_iviId; }
 
@@ -44,13 +44,13 @@ private:
 class Compositor : public QWaylandCompositor {
   Q_OBJECT
 public:
-  Compositor(Window *window);
+  Compositor(Window4wlc *window);
   ~Compositor() override;
   void create() override;
 
-  QList<View *> views() const { return m_views; }
-  View *viewAt(const QPoint &position);
-  void raise(View *view);
+  QList<WlView *> views() const { return m_views; }
+  WlView *viewAt(const QPoint &position);
+  void raise(WlView *view);
 
   void handleMousePress(const QPoint &position, Qt::MouseButton button);
   void handleMouseRelease(const QPoint &position, Qt::MouseButton button, Qt::MouseButtons buttons);
@@ -70,10 +70,10 @@ private slots:
   void viewSurfaceDestroyed();
 
 private:
-  Window *m_window = nullptr;
+  Window4wlc *m_window = nullptr;
   QWaylandIviApplication *m_iviApplication = nullptr;
-  QList<View *> m_views;
-  QPointer<View> m_mouseView;
+  QList<WlView *> m_views;
+  QPointer<WlView> m_mouseView;
 };
 
 QT_END_NAMESPACE

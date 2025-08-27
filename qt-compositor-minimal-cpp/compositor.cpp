@@ -12,20 +12,22 @@
 #include <QOpenGLFunctions>
 #include <QRandomGenerator>
 
+WlView::WlView(int iviId) : m_iviId(iviId) {}
+
 //! [getTexture]
-QOpenGLTexture *View::getTexture() {
+QOpenGLTexture *WlView::getTexture() {
   if (advance())
     m_texture = currentBuffer().toOpenGLTexture();
   return m_texture;
 }
 //! [getTexture]
 
-QPoint View::mapToLocal(const QPoint &globalPos) const { return globalPos - globalPosition(); }
+QPoint WlView::mapToLocal(const QPoint &globalPos) const { return globalPos - globalPosition(); }
 
 // Normally, an IVI based compositor would have a design where each window has
 // a defined position, based on the id. In this example, we just assign a random position.
 
-void View::initPosition(const QSize &screenSize, const QSize &surfaceSize) {
+void WlView::initPosition(const QSize &screenSize, const QSize &surfaceSize) {
   if (m_positionSet)
     return;
   QRandomGenerator rand(iviId());
@@ -34,10 +36,26 @@ void View::initPosition(const QSize &screenSize, const QSize &surfaceSize) {
   setGlobalPosition(QPoint(rand.bounded(xrange), rand.bounded(yrange)));
 }
 
-Compositor::Compositor(Window *window) : m_window(window) {
+WlView *Compositor::viewAt(const QPoint &position) {
+  // Since views are stored in painting order (back to front), we have to iterate backwards
+  // to find the topmost view at a given point.
+  for (auto it = m_views.crbegin(); it != m_views.crend(); ++it) {
+    WlView *view = *it;
+    if (view->globalGeometry().contains(position))
+      return view;
+  }
+  return nullptr;
+}
+
+/*
+ *----------------------------------------
+ *WlView.Compositor
+ *----------------------------------------
+ */
+Compositor::Compositor(Window4wlc *window) : m_window(window) {
   window->setCompositor(this);
   setSocketName("wayland-qt0");
-  connect(window, &Window::glReady, this, [this] { create(); });
+  connect(window, &Window4wlc::glReady, this, [this] { create(); });
 }
 
 Compositor::~Compositor() {}
@@ -55,25 +73,14 @@ void Compositor::create() {
 }
 //! [create]
 
-View *Compositor::viewAt(const QPoint &position) {
-  // Since views are stored in painting order (back to front), we have to iterate backwards
-  // to find the topmost view at a given point.
-  for (auto it = m_views.crbegin(); it != m_views.crend(); ++it) {
-    View *view = *it;
-    if (view->globalGeometry().contains(position))
-      return view;
-  }
-  return nullptr;
-}
-
-void Compositor::raise(View *view) {
+void Compositor::raise(WlView *view) {
   m_views.removeAll(view);
   m_views.append(view);
   defaultSeat()->setKeyboardFocus(view->surface());
   triggerRender();
 }
 
-static inline QPoint mapToView(const View *view, const QPoint &position) { return view ? view->mapToLocal(position) : position; }
+static inline QPoint mapToView(const WlView *view, const QPoint &position) { return view ? view->mapToLocal(position) : position; }
 
 //! [handleMousePress]
 void Compositor::handleMousePress(const QPoint &position, Qt::MouseButton button) {
@@ -94,7 +101,7 @@ void Compositor::handleMouseRelease(const QPoint &position, Qt::MouseButton butt
   seat->sendMouseReleaseEvent(button);
 
   if (buttons == Qt::NoButton) {
-    View *newView = viewAt(position);
+    WlView *newView = viewAt(position);
     if (newView != m_mouseView)
       seat->sendMouseMoveEvent(newView, mapToView(newView, position));
     m_mouseView = nullptr;
@@ -103,7 +110,7 @@ void Compositor::handleMouseRelease(const QPoint &position, Qt::MouseButton butt
 //! [handleMouseRelease]
 
 void Compositor::handleMouseMove(const QPoint &position) {
-  View *view = m_mouseView ? m_mouseView.data() : viewAt(position);
+  WlView *view = m_mouseView ? m_mouseView.data() : viewAt(position);
   defaultSeat()->sendMouseMoveEvent(view, mapToView(view, position));
 }
 
@@ -121,7 +128,7 @@ void Compositor::handleKeyRelease(quint32 nativeScanCode) { defaultSeat()->sendK
 
 //! [surfaceCreated]
 void Compositor::onIviSurfaceCreated(QWaylandIviSurface *iviSurface) {
-  View *view = new View(iviSurface->iviId());
+  WlView *view = new WlView(iviSurface->iviId());
   view->setSurface(iviSurface->surface());
   view->setOutput(outputFor(m_window));
 
@@ -133,7 +140,7 @@ void Compositor::onIviSurfaceCreated(QWaylandIviSurface *iviSurface) {
 
 //! [surfaceDestroyed]
 void Compositor::viewSurfaceDestroyed() {
-  View *view = qobject_cast<View *>(sender());
+  WlView *view = qobject_cast<WlView *>(sender());
   m_views.removeAll(view);
   delete view;
   triggerRender();

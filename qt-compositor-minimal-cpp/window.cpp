@@ -10,17 +10,17 @@
 #include <QOpenGLTexture>
 #include <QPainter>
 
-Window::Window() {}
+Window4wlc::Window4wlc() {}
 
-void Window::setCompositor(Compositor *comp) { m_compositor = comp; }
+void Window4wlc::setCompositor(Compositor *comp) { m_compositor = comp; }
 
-void Window::initializeGL() {
+void Window4wlc::initializeGL() {
   m_textureBlitter.create();
   emit glReady();
 }
 
 //! [paintGL]
-void Window::paintGL() {
+void Window4wlc::paintGL() {
   m_compositor->startRender();
 
   QOpenGLFunctions *functions = context()->functions();
@@ -33,7 +33,7 @@ void Window::paintGL() {
   functions->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   const auto views = m_compositor->views();
-  for (View *view : views) {
+  for (WlView *view : views) {
     auto texture = view->getTexture();
     if (!texture)
       continue;
@@ -60,17 +60,17 @@ void Window::paintGL() {
 //! [paintGL]
 
 //! [mousePressEvent]
-void Window::mousePressEvent(QMouseEvent *event) { m_compositor->handleMousePress(event->position().toPoint(), event->button()); }
+void Window4wlc::mousePressEvent(QMouseEvent *event) { m_compositor->handleMousePress(event->position().toPoint(), event->button()); }
 //! [mousePressEvent]
 
-void Window::mouseReleaseEvent(QMouseEvent *event) { m_compositor->handleMouseRelease(event->position().toPoint(), event->button(), event->buttons()); }
+void Window4wlc::mouseReleaseEvent(QMouseEvent *event) { m_compositor->handleMouseRelease(event->position().toPoint(), event->button(), event->buttons()); }
 
-void Window::mouseMoveEvent(QMouseEvent *event) { m_compositor->handleMouseMove(event->position().toPoint()); }
+void Window4wlc::mouseMoveEvent(QMouseEvent *event) { m_compositor->handleMouseMove(event->position().toPoint()); }
 
-void Window::wheelEvent(QWheelEvent *event) { m_compositor->handleMouseWheel(event->angleDelta()); }
+void Window4wlc::wheelEvent(QWheelEvent *event) { m_compositor->handleMouseWheel(event->angleDelta()); }
 
 //! [keyPressEvent]
-void Window::keyPressEvent(QKeyEvent *e) { m_compositor->handleKeyPress(e->nativeScanCode()); }
+void Window4wlc::keyPressEvent(QKeyEvent *e) { m_compositor->handleKeyPress(e->nativeScanCode()); }
 //! [keyPressEvent]
 
-void Window::keyReleaseEvent(QKeyEvent *e) { m_compositor->handleKeyRelease(e->nativeScanCode()); }
+void Window4wlc::keyReleaseEvent(QKeyEvent *e) { m_compositor->handleKeyRelease(e->nativeScanCode()); }

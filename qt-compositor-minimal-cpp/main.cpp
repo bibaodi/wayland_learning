@@ -8,7 +8,7 @@
 int main(int argc, char *argv[]) {
   QGuiApplication app(argc, argv);
 
-  Window window;
+  Window4wlc window;
   window.resize(800, 600);
   Compositor compositor(&window);
   window.show();
